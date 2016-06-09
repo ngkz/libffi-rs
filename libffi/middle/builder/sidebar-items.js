@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Builder","Provides a builder-style API for constructing CIFs and closures."]]});

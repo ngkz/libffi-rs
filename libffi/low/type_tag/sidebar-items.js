@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["COMPLEX","Indicates a complex number type."],["STRUCT","Indicates a structure type."]]});

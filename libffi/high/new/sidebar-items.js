@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Cif",""],["Closure",""]],"type":[["Cif1",""],["Cif2",""],["Closure1",""],["Closure2",""]]});

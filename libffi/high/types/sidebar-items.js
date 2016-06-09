@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Type","Represents a C type statically associated with a Rust type."]],"trait":[["CType","Types that we can automatically marshall to/from C."]],"type":[["c_c32","Laid out the same as C11 `float complex` and C++11 `std::complex<float>`."],["c_c64","Laid out the same as C11 `double complex` and C++11 `std::complex<double>`."]]});

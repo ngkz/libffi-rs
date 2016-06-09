@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Type","Represents a single C type."]]});
