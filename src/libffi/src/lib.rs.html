@@ -129,6 +129,7 @@
 <span id="85">85</span>
 <span id="86">86</span>
 <span id="87">87</span>
+<span id="88">88</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Rust bindings for [libffi](https://sourceware.org/libffi/).</span>
 <span class='doccomment'>//!</span>
@@ -205,6 +206,7 @@
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>feature</span>(<span class='ident'>plugin</span>))]</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>plugin</span>(<span class='ident'>clippy</span>))]</span>
 
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>abort_on_panic</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='doccomment'>/// Unwrapped definitions imported from the C library (via bindgen).</span>

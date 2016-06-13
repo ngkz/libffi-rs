@@ -545,6 +545,10 @@
 <span id="501">501</span>
 <span id="502">502</span>
 <span id="503">503</span>
+<span id="504">504</span>
+<span id="505">505</span>
+<span id="506">506</span>
+<span id="507">507</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! High layer providing automatic marshalling of Rust closures</span>
 <span class='doccomment'>//! as C function pointers.</span>
@@ -639,7 +643,8 @@
         <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>module</span> {
             <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>Any</span>;
             <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span>;
-            <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>mem</span>, <span class='ident'>ptr</span>};
+            <span class='kw'>use</span> <span class='ident'>std</span>::{<span class='ident'>mem</span>, <span class='ident'>process</span>, <span class='ident'>ptr</span>};
+            <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Write</span>};
 
             <span class='kw'>use</span> <span class='ident'>super</span>::<span class='op'>*</span>;
             <span class='kw'>use</span> <span class='ident'>middle</span>;
@@ -893,13 +898,16 @@
                   <span class='kw'>where</span> <span class='ident'>Callback</span>: <span class='ident'>FnOnce</span>($( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>T</span>, )<span class='op'>*</span>) <span class='op'>-&gt;</span> <span class='ident'>R</span>
                 {
                     <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>userdata</span>) <span class='op'>=</span> <span class='ident'>userdata</span>.<span class='ident'>take</span>() {
-                        <span class='kw'>unsafe</span> {
-                            <span class='ident'>ptr</span>::<span class='ident'>write</span>(<span class='ident'>result</span>, <span class='ident'>userdata</span>($( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>T</span>, )<span class='op'>*</span>));
-                        }
+                        <span class='macro'>abort_on_panic</span><span class='macro'>!</span>(<span class='string'>&quot;Cannot panic inside FFI callback&quot;</span>, {
+                            <span class='kw'>unsafe</span> {
+                                <span class='ident'>ptr</span>::<span class='ident'>write</span>(<span class='ident'>result</span>, <span class='ident'>userdata</span>($( <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>T</span>, )<span class='op'>*</span>));
+                            }
+                        });
                     } <span class='kw'>else</span> {
-                        <span class='comment'>// It&#39;s definitely wrong to panic right before</span>
-                        <span class='comment'>// we return to C.</span>
-                        <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Userdata already used&quot;</span>);
+                        <span class='comment'>// There is probably a better way to abort here.</span>
+                        <span class='kw'>let</span> _ <span class='op'>=</span>
+                            <span class='ident'>io</span>::<span class='ident'>stderr</span>().<span class='ident'>write</span>(<span class='string'>b&quot;FnOnce closure already used&quot;</span>);
+                        <span class='ident'>process</span>::<span class='ident'>exit</span>(<span class='number'>2</span>);
                     }
                 }
             }
