@@ -640,6 +640,7 @@
 <span id="596">596</span>
 <span id="597">597</span>
 <span id="598">598</span>
+<span id="599">599</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A low-level wrapping of libffi, this layer makes no attempts at safety,</span>
 <span class='doccomment'>//! but tries to provide a somewhat more idiomatic interface.</span>
@@ -659,9 +660,9 @@
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Error</span> {
     <span class='doccomment'>/// Given a bad or unsupported type representation.</span>
-    <span class='ident'>BadTypedef</span>,
+    <span class='ident'>Typedef</span>,
     <span class='doccomment'>/// Given a bad or unsupported ABI.</span>
-    <span class='ident'>BadAbi</span>,
+    <span class='ident'>Abi</span>,
 }
 
 <span class='doccomment'>/// The `Result` type specialized for libffi `Error`s.</span>
@@ -672,8 +673,8 @@
     <span class='kw'>use</span> <span class='ident'>raw</span>::<span class='ident'>ffi_status</span>::<span class='op'>*</span>;
     <span class='kw'>match</span> <span class='ident'>status</span> {
         <span class='ident'>FFI_OK</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>good</span>),
-        <span class='ident'>FFI_BAD_TYPEDEF</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>BadTypedef</span>),
-        <span class='ident'>FFI_BAD_ABI</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>BadAbi</span>),
+        <span class='ident'>FFI_BAD_TYPEDEF</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Typedef</span>),
+        <span class='ident'>FFI_BAD_ABI</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Abi</span>),
     }
 }
 
@@ -835,12 +836,13 @@
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>COMPLEX</span>: <span class='ident'>c_ushort</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_type_enum</span>::<span class='ident'>COMPLEX</span> <span class='kw'>as</span> <span class='ident'>c_ushort</span>;
 }
 
-<span class='doccomment'>/// Initalizes a CIF (Call InterFace) with the given ABI and types.</span>
+<span class='doccomment'>/// Initalizes a CIF (Call Interface) with the given ABI</span>
+<span class='doccomment'>/// and types.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// We need to initialize a CIF before we can use it to call a function</span>
 <span class='doccomment'>/// or create a closure. This function lets us specify the calling</span>
 <span class='doccomment'>/// convention to use and the argument and result types. For varargs</span>
-<span class='doccomment'>/// CIF initialization, see [prep_cif_var](fn.prep_cif_var.html).</span>
+<span class='doccomment'>/// CIF initialization, see [`prep_cif_var`](fn.prep_cif_var.html).</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Safety</span>
@@ -890,12 +892,12 @@
     <span class='ident'>status_to_result</span>(<span class='ident'>status</span>, ())
 }
 
-<span class='doccomment'>/// Initalizes a CIF (Call InterFace) for a varargs function.</span>
+<span class='doccomment'>/// Initalizes a CIF (Call Interface) for a varargs function.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// We need to initialize a CIF before we can use it to call a function</span>
 <span class='doccomment'>/// or create a closure. This function lets us specify the calling</span>
 <span class='doccomment'>/// convention to use and the argument and result types. For non-varargs</span>
-<span class='doccomment'>/// CIF initialization, see [prep_cif](fn.prep_cif.html).</span>
+<span class='doccomment'>/// CIF initialization, see [`prep_cif`](fn.prep_cif.html).</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Safety</span>
 <span class='doccomment'>///</span>

@@ -542,13 +542,18 @@
 <span id="498">498</span>
 <span id="499">499</span>
 <span id="500">500</span>
+<span id="501">501</span>
+<span id="502">502</span>
+<span id="503">503</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! High layer providing automatic marshalling of Rust closures</span>
 <span class='doccomment'>//! as C function pointers.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The main facility here is given by the structs</span>
-<span class='doccomment'>//! &lt;code&gt;Closure&lt;em&gt;N&lt;/em&gt;&lt;/code&gt; and</span>
-<span class='doccomment'>//! &lt;code&gt;ClosureMut&lt;em&gt;N&lt;/em&gt;&lt;/code&gt;, for natural numbers *`N`*</span>
+<span class='doccomment'>//! &lt;code&gt;Closure&lt;em&gt;N&lt;/em&gt;&lt;/code&gt;,</span>
+<span class='doccomment'>//! &lt;code&gt;Closure&lt;span&gt;&lt;/span&gt;Mut&lt;em&gt;N&lt;/em&gt;&lt;/code&gt;,</span>
+<span class='doccomment'>//! and &lt;code&gt;Closure&lt;span&gt;&lt;/span&gt;Once&lt;em&gt;N&lt;/em&gt;&lt;/code&gt;,</span>
+<span class='doccomment'>//! for natural numbers *`N`*</span>
 <span class='doccomment'>//! from `0` to `12` (as of</span>
 <span class='doccomment'>//! now). These represent C closures of *`N`* arguments, which can be</span>
 <span class='doccomment'>//! used to turn Rust lambdas (or in generally, anything that implements</span>
@@ -630,6 +635,7 @@
         <span class='op'>=&gt;</span>
     {
         <span class='doccomment'>/// CIF and closure types organized by function arity.</span>
+        <span class='attribute'>#[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>allow</span>(<span class='ident'>too_many_arguments</span>))]</span>
         <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>module</span> {
             <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>Any</span>;
             <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span>;

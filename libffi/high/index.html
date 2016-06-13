@@ -47,13 +47,15 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-397' class='srclink' href='../../src/libffi/src/high/mod.rs.html#1-500' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-397' class='srclink' href='../../src/libffi/src/high/mod.rs.html#1-503' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>High layer providing automatic marshalling of Rust closures
 as C function pointers.</p>
 
 <p>The main facility here is given by the structs
-<code>Closure<em>N</em></code> and
-<code>ClosureMut<em>N</em></code>, for natural numbers <em><code>N</code></em>
+<code>Closure<em>N</em></code>,
+<code>Closure<span></span>Mut<em>N</em></code>,
+and <code>Closure<span></span>Once<em>N</em></code>,
+for natural numbers <em><code>N</code></em>
 from <code>0</code> to <code>12</code> (as of
 now). These represent C closures of <em><code>N</code></em> arguments, which can be
 used to turn Rust lambdas (or in generally, anything that implements

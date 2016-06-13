@@ -505,13 +505,15 @@
 <span id="461">461</span>
 <span id="462">462</span>
 <span id="463">463</span>
+<span id="464">464</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Representations of C types and arrays thereof.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! These are used to describe the types of the arguments and results of</span>
-<span class='doccomment'>//! functions. When we construct a CIF (“Call InterFace”), we provide a</span>
-<span class='doccomment'>//! sequence of argument types and a result type, and libffi uses this</span>
-<span class='doccomment'>//! to figure out how to set up a call to a function with those types.</span>
+<span class='doccomment'>//! functions. When we construct a CIF (“Call Inter&lt;span&gt;&lt;/span&gt;Face”),</span>
+<span class='doccomment'>//! we provide a sequence of argument types and a result type, and</span>
+<span class='doccomment'>//! libffi uses this to figure out how to set up a call to a function</span>
+<span class='doccomment'>//! with those types.</span>
 
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>;
@@ -631,7 +633,7 @@
     <span class='ident'>new</span>
 }
 
-<span class='doccomment'>/// Creates a struct ffi_type with the given elements. Takes ownership</span>
+<span class='doccomment'>/// Creates a struct `ffi_type` with the given elements. Takes ownership</span>
 <span class='doccomment'>/// of the elements.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_struct_create</span><span class='op'>&lt;</span><span class='ident'>I</span><span class='op'>&gt;</span>(<span class='ident'>elements</span>: <span class='ident'>I</span>) <span class='op'>-&gt;</span> <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>Type_</span><span class='op'>&gt;</span>
     <span class='kw'>where</span> <span class='ident'>I</span>: <span class='ident'>ExactSizeIterator</span><span class='op'>&lt;</span><span class='ident'>Item</span><span class='op'>=</span><span class='ident'>Type</span><span class='op'>&gt;</span>
@@ -660,7 +662,7 @@
     }
 }
 
-<span class='doccomment'>/// Destroys a TypeArray_ and all of its elements.</span>
+<span class='doccomment'>/// Destroys a `TypeArray_` and all of its elements.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_array_destroy</span>(<span class='ident'>victim</span>: <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>TypeArray_</span><span class='op'>&gt;</span>) {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>current</span> <span class='op'>=</span> <span class='ident'>victim</span>;
     <span class='kw'>while</span> <span class='op'>!</span>(<span class='op'>*</span><span class='ident'>current</span>).<span class='ident'>is_null</span>() {
@@ -671,7 +673,7 @@
     <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>victim</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>);
 }
 
-<span class='doccomment'>/// Destroys a Type_ if it was dynamically allocated.</span>
+<span class='doccomment'>/// Destroys a `Type_` if it was dynamically allocated.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_destroy</span>(<span class='ident'>victim</span>: <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>Type_</span><span class='op'>&gt;</span>) {
     <span class='kw'>if</span> (<span class='op'>*</span><span class='ident'>victim</span>).<span class='ident'>type_</span> <span class='op'>==</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span> {
         <span class='ident'>ffi_type_array_destroy</span>((<span class='op'>*</span><span class='ident'>victim</span>).<span class='ident'>elements</span>);

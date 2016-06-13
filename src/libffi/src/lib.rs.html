@@ -123,9 +123,13 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
 </pre><pre class='rust '>
-<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unique&quot;</span>, <span class='ident'>feature</span>(<span class='ident'>unique</span>))]</span>
-
 <span class='doccomment'>//! Rust bindings for [libffi](https://sourceware.org/libffi/).</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! The C libffi library provides two main facilities: assembling calls</span>
@@ -194,12 +198,20 @@
 <span class='doccomment'>//! assert_eq!(18, fun(6, 7));</span>
 <span class='doccomment'>//! ```</span>
 
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>deny</span>(<span class='ident'>missing_docs</span>)]</span>
+
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;unique&quot;</span>, <span class='ident'>feature</span>(<span class='ident'>unique</span>))]</span>
+
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>feature</span>(<span class='ident'>plugin</span>))]</span>
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>cfg_attr</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;clippy&quot;</span>, <span class='ident'>plugin</span>(<span class='ident'>clippy</span>))]</span>
+
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
 <span class='doccomment'>/// Unwrapped definitions imported from the C library (via bindgen).</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// This module is generated and undocumented, but you can see the [C</span>
 <span class='doccomment'>/// libffi documentation](libffi.txt).</span>
+<span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>missing_docs</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>raw</span>;
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>high</span>;
