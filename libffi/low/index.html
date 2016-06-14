@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-5011' class='srclink' href='../../src/libffi/src/low.rs.html#1-599' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4623' class='srclink' href='../../src/libffi/src/low.rs.html#1-603' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A low-level wrapping of libffi, this layer makes no attempts at safety,
 but tries to provide a somewhat more idiomatic interface.</p>
 
@@ -56,8 +56,7 @@ library, so it should not be generally necessary to use the <code>raw</code> mod
 While this is a bit “Rustier” than <a href="../raw/index.html"><code>raw</code></a>, I’ve
 avoided drastic renaming in favor of hewing close to the libffi API.
 See <a href="../middle/index.html"><code>middle</code></a> for an easier-to-use approach.</p>
-</div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use raw::{<a class='enum' href='../../libffi/raw/enum.ffi_abi.html' title='libffi::raw::ffi_abi'>ffi_abi</a>, FFI_DEFAULT_ABI, <a class='struct' href='../../libffi/raw/struct._ffi_type.html' title='libffi::raw::_ffi_type'>_ffi_type</a> as ffi_type, <a class='enum' href='../../libffi/raw/enum.ffi_status.html' title='libffi::raw::ffi_status'>ffi_status</a>, <a class='struct' href='../../libffi/raw/struct.ffi_cif.html' title='libffi::raw::ffi_cif'>ffi_cif</a>, <a class='struct' href='../../libffi/raw/struct.ffi_closure.html' title='libffi::raw::ffi_closure'>ffi_closure</a>};</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
+</div><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='mod' href='type_tag/index.html'
@@ -81,6 +80,27 @@ arguments and results.</p>
                            <td class='docblock short'>
                                 <p>Wraps a function pointer of unknown type.</p>
                            </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ffi_cif.html'
+                                  title='libffi::low::ffi_cif'>ffi_cif</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ffi_closure.html'
+                                  title='libffi::low::ffi_closure'>ffi_closure</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ffi_type.html'
+                                  title='libffi::low::ffi_type'>ffi_type</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -88,6 +108,28 @@ arguments and results.</p>
                                   title='libffi::low::Error'>Error</a></td>
                            <td class='docblock short'>
                                 <p>The two kinds of errors reported by libffi.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.ffi_abi.html'
+                                  title='libffi::low::ffi_abi'>ffi_abi</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.ffi_status.html'
+                                  title='libffi::low::ffi_status'>ffi_status</a></td>
+                           <td class='docblock short'>
+                                
+                           </td>
+                       </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
+<table>
+                       <tr class=' module-item'>
+                           <td><a class='constant' href='constant.FFI_DEFAULT_ABI.html'
+                                  title='libffi::low::FFI_DEFAULT_ABI'>FFI_DEFAULT_ABI</a></td>
+                           <td class='docblock short'>
+                                
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>

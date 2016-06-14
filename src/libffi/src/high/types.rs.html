@@ -157,6 +157,16 @@
 <span id="113">113</span>
 <span id="114">114</span>
 <span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Representations of C types for the high layer.</span>
 
@@ -242,6 +252,8 @@
 <span class='doccomment'>/// Laid out the same as C11 `float complex` and C++11</span>
 <span class='doccomment'>/// `std::complex&lt;float&gt;`.</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// # Warning</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// This type does not obey the ABI, and as such should not be passed by</span>
@@ -249,11 +261,14 @@
 <span class='doccomment'>/// okay. Theoretically, passing it via libffi is okay, but libffi</span>
 <span class='doccomment'>/// doesn’t have complex support on most platforms yet.</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>)]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>c_c32</span> <span class='op'>=</span> [<span class='ident'>f32</span>; <span class='number'>2</span>];
 
 <span class='doccomment'>/// Laid out the same as C11 `double complex` and C++11</span>
 <span class='doccomment'>/// `std::complex&lt;double&gt;`.</span>
 <span class='doccomment'>///</span>
+<span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+<span class='doccomment'>///</span>
 <span class='doccomment'>/// # Warning</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// This type does not obey the ABI, and as such should not be passed by</span>
@@ -261,9 +276,14 @@
 <span class='doccomment'>/// okay. Theoretically, passing it via libffi is okay, but libffi</span>
 <span class='doccomment'>/// doesn’t have complex support on most platforms yet.</span>
 <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>non_camel_case_types</span>)]</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>c_c64</span> <span class='op'>=</span> [<span class='ident'>f64</span>; <span class='number'>2</span>];
 
+<span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
 <span class='macro'>impl_ffi_type</span><span class='macro'>!</span>(<span class='ident'>c_c32</span>, <span class='ident'>c32</span>);
+<span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+<span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
 <span class='macro'>impl_ffi_type</span><span class='macro'>!</span>(<span class='ident'>c_c64</span>, <span class='ident'>c64</span>);
 
 <span class='kw'>unsafe</span> <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>CType</span> <span class='kw'>for</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>T</span> {

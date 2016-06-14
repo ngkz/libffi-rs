@@ -641,6 +641,10 @@
 <span id="597">597</span>
 <span id="598">598</span>
 <span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! A low-level wrapping of libffi, this layer makes no attempts at safety,</span>
 <span class='doccomment'>//! but tries to provide a somewhat more idiomatic interface.</span>
@@ -781,8 +785,9 @@
                   <span class='ident'>ffi_type_float</span> <span class='kw'>as</span> <span class='ident'>float</span>,
                   <span class='ident'>ffi_type_double</span> <span class='kw'>as</span> <span class='ident'>double</span>,
                   <span class='ident'>ffi_type_pointer</span> <span class='kw'>as</span> <span class='ident'>pointer</span>,
-                  <span class='ident'>ffi_type_longdouble</span> <span class='kw'>as</span> <span class='ident'>longdouble</span>,
-                  <span class='ident'>ffi_type_complex_float</span> <span class='kw'>as</span> <span class='ident'>complex_float</span>,
+                  <span class='ident'>ffi_type_longdouble</span> <span class='kw'>as</span> <span class='ident'>longdouble</span>};
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>raw</span>::{<span class='ident'>ffi_type_complex_float</span> <span class='kw'>as</span> <span class='ident'>complex_float</span>,
                   <span class='ident'>ffi_type_complex_double</span> <span class='kw'>as</span> <span class='ident'>complex_double</span>,
                   <span class='ident'>ffi_type_complex_longdouble</span> <span class='kw'>as</span> <span class='ident'>complex_longdouble</span>};
 }
@@ -833,6 +838,9 @@
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>STRUCT</span>:  <span class='ident'>c_ushort</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_type_enum</span>::<span class='ident'>STRUCT</span> <span class='kw'>as</span> <span class='ident'>c_ushort</span>;
 
     <span class='doccomment'>/// Indicates a complex number type.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>COMPLEX</span>: <span class='ident'>c_ushort</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_type_enum</span>::<span class='ident'>COMPLEX</span> <span class='kw'>as</span> <span class='ident'>c_ushort</span>;
 }
 

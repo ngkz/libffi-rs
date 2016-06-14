@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4898' class='srclink' href='../../src/libffi/src/middle/mod.rs.html#86-90' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4510' class='srclink' href='../../src/libffi/src/middle/mod.rs.html#86-90' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Cif {
     // some fields omitted
 }</pre><div class='docblock'><p>Describes the calling convention and types for calling a function.</p>
@@ -92,9 +92,9 @@ arguments <code>args</code>, and returns the result.</p>
 <p>There is no checking that the calling convention and types
 in the <code>Cif</code> match the actual calling convention and types of
 <code>fun</code>, nor that they match the types of <code>args</code>.</p>
-</div><h4 id='method.set_abi' class='method'><code>fn <a href='#method.set_abi' class='fnname'>set_abi</a>(&amp;mut self, abi: <a class='enum' href='../../libffi/raw/enum.ffi_abi.html' title='libffi::raw::ffi_abi'>FfiAbi</a>)</code></h4>
+</div><h4 id='method.set_abi' class='method'><code>fn <a href='#method.set_abi' class='fnname'>set_abi</a>(&amp;mut self, abi: <a class='enum' href='../../libffi/low/enum.ffi_abi.html' title='libffi::low::ffi_abi'>FfiAbi</a>)</code></h4>
 <div class='docblock'><p>Sets the CIF to use the given calling convention.</p>
-</div><h4 id='method.as_raw_ptr' class='method'><code>fn <a href='#method.as_raw_ptr' class='fnname'>as_raw_ptr</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/raw/struct.ffi_cif.html' title='libffi::raw::ffi_cif'>ffi_cif</a></code></h4>
+</div><h4 id='method.as_raw_ptr' class='method'><code>fn <a href='#method.as_raw_ptr' class='fnname'>as_raw_ptr</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a></code></h4>
 <div class='docblock'><p>Gets a raw pointer to the underlying
 <a href="../low/struct.ffi_cif.html"><code>ffi_cif</code></a>.</p>
 

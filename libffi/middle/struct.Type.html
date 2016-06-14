@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4699' class='srclink' href='../../src/libffi/src/middle/types.rs.html#56' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-4311' class='srclink' href='../../src/libffi/src/middle/types.rs.html#56' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Type(_);</pre><div class='docblock'><p>Represents a single C type.</p>
 
 <h1 id='example' class='section-header'><a href='#example'>Example</a></h1>
@@ -124,13 +124,19 @@ argument or struct member.</p>
 <div class='docblock'><p>Returns the C <code>long double</code> (extended-precision floating point) type.</p>
 </div><h4 id='method.c32' class='method'><code>fn <a href='#method.c32' class='fnname'>c32</a>() -&gt; Self</code></h4>
 <div class='docblock'><p>Returns the C <code>_Complex float</code> type.</p>
+
+<p>This item is enabled by <code>#[cfg(feature = &quot;complex&quot;)]</code>.</p>
 </div><h4 id='method.c64' class='method'><code>fn <a href='#method.c64' class='fnname'>c64</a>() -&gt; Self</code></h4>
 <div class='docblock'><p>Returns the C <code>_Complex double</code> type.</p>
+
+<p>This item is enabled by <code>#[cfg(feature = &quot;complex&quot;)]</code>.</p>
 </div><h4 id='method.complex_longdouble' class='method'><code>fn <a href='#method.complex_longdouble' class='fnname'>complex_longdouble</a>() -&gt; Self</code></h4>
 <div class='docblock'><p>Returns the C <code>_Complex long double</code> type.</p>
+
+<p>This item is enabled by <code>#[cfg(feature = &quot;complex&quot;)]</code>.</p>
 </div><h4 id='method.structure' class='method'><code>fn <a href='#method.structure' class='fnname'>structure</a>&lt;I&gt;(fields: I) -&gt; Self <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/trait.ExactSizeIterator.html' title='core::iter::ExactSizeIterator'>ExactSizeIterator</a>&lt;Item=<a class='struct' href='../../libffi/middle/struct.Type.html' title='libffi::middle::Type'>Type</a>&gt;</span></code></h4>
 <div class='docblock'><p>Constructs a structure type whose fields have the given types.</p>
-</div><h4 id='method.as_raw_ptr' class='method'><code>fn <a href='#method.as_raw_ptr' class='fnname'>as_raw_ptr</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/raw/struct._ffi_type.html' title='libffi::raw::_ffi_type'>ffi_type</a></code></h4>
+</div><h4 id='method.as_raw_ptr' class='method'><code>fn <a href='#method.as_raw_ptr' class='fnname'>as_raw_ptr</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_type.html' title='libffi::low::ffi_type'>ffi_type</a></code></h4>
 <div class='docblock'><p>Gets a raw pointer to the underlying
 <a href="../raw/struct._ffi_type.html"><code>ffi_type</code></a>.</p>
 

@@ -506,6 +506,15 @@
 <span id="462">462</span>
 <span id="463">463</span>
 <span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Representations of C types and arrays thereof.</span>
 <span class='doccomment'>//!</span>
@@ -887,16 +896,25 @@
     }
 
     <span class='doccomment'>/// Returns the C `_Complex float` type.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>c32</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
         <span class='ident'>Type</span>(<span class='kw'>unsafe</span> { <span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>types</span>::<span class='ident'>complex_float</span>) })
     }
 
     <span class='doccomment'>/// Returns the C `_Complex double` type.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>c64</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
         <span class='ident'>Type</span>(<span class='kw'>unsafe</span> { <span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>types</span>::<span class='ident'>complex_double</span>) })
     }
 
     <span class='doccomment'>/// Returns the C `_Complex long double` type.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This item is enabled by `#[cfg(feature = &quot;complex&quot;)]`.</span>
+    <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;complex&quot;</span>)]</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>complex_longdouble</span>() <span class='op'>-&gt;</span> <span class='kw'>Self</span> {
         <span class='ident'>Type</span>(<span class='kw'>unsafe</span> { <span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>types</span>::<span class='ident'>complex_longdouble</span>) })
     }
