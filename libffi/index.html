@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-0' class='srclink' href='../src/libffi/src/lib.rs.html#1-108' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-0' class='srclink' href='../src/libffi/src/lib.rs.html#1-94' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Rust bindings for <a href="https://sourceware.org/libffi/">libffi</a>.</p>
 
 <p>The C libffi library provides two main facilities: assembling calls
@@ -62,25 +62,10 @@ less checking) is provided by the <a href="middle/index.html"><code>middle</code
 <a href="low/index.html"><code>low</code></a> layers.</p>
 
 <h1 id='usage' class='section-header'><a href='#usage'>Usage</a></h1>
-<p>It’s <a href="https://crates.io/crates/libffi">on crates.io</a>, but before you
-build it, make sure you have the dependencies installed first:</p>
-
-<ul>
-<li><p>An up-to-date version of C <a href="https://sourceware.org/libffi/">libffi</a>
-Version 3.2.1 is known to work. Earlier versions, such as the
-versions that come with Mac OS and Fedora, are known not to; neither
-will the version installed by Homebrew (3.0.13).</p></li>
-<li><p><a href="https://www.freedesktop.org/wiki/Software/pkg-config/"><code>pkg-config</code></a>,
-which you probably already have if you’re on Linux. For Mac users,
-the version installed by Homebrew is up to date. (I don’t know how
-this works on Windows; contact me if you’d like to help figure it
-out.)</p></li>
-</ul>
-
-<p>Then add</p>
+<p>It’s <a href="https://crates.io/crates/libffi">on crates.io</a>, so you can add</p>
 
 <pre><code class="language-toml">[dependencies]
-libffi = &quot;0.3.3&quot;
+libffi = &quot;0.4.0&quot;
 </code></pre>
 
 <p>to your <code>Cargo.toml</code> and</p>
