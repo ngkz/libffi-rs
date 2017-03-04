@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4623' class='srclink' href='../../src/libffi/src/low.rs.html#1-603' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/libffi/low.rs.html#1-603' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A low-level wrapping of libffi, this layer makes no attempts at safety,
 but tries to provide a somewhat more idiomatic interface.</p>
 
@@ -61,14 +61,14 @@ See <a href="../middle/index.html"><code>middle</code></a> for an easier-to-use 
                        <tr class=' module-item'>
                            <td><a class='mod' href='type_tag/index.html'
                                   title='libffi::low::type_tag'>type_tag</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Type tags used in constructing and inspecting <code>ffi_type</code>s.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='mod' href='types/index.html'
                                   title='libffi::low::types'>types</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Re-exports the <code>ffi_type</code> objects used to describe the types of
 arguments and results.</p>
                            </td>
@@ -77,28 +77,28 @@ arguments and results.</p>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.CodePtr.html'
                                   title='libffi::low::CodePtr'>CodePtr</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Wraps a function pointer of unknown type.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.ffi_cif.html'
                                   title='libffi::low::ffi_cif'>ffi_cif</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.ffi_closure.html'
                                   title='libffi::low::ffi_closure'>ffi_closure</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.ffi_type.html'
                                   title='libffi::low::ffi_type'>ffi_type</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -106,80 +106,80 @@ arguments and results.</p>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.Error.html'
                                   title='libffi::low::Error'>Error</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The two kinds of errors reported by libffi.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.ffi_abi.html'
                                   title='libffi::low::ffi_abi'>ffi_abi</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.ffi_status.html'
                                   title='libffi::low::ffi_status'>ffi_status</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FFI_DEFAULT_ABI.html'
-                                  title='libffi::low::FFI_DEFAULT_ABI'>FFI_DEFAULT_ABI</a></td>
-                           <td class='docblock short'>
+                           <td><a class='constant' href='constant.ffi_abi_FFI_DEFAULT_ABI.html'
+                                  title='libffi::low::ffi_abi_FFI_DEFAULT_ABI'>ffi_abi_FFI_DEFAULT_ABI</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.call.html'
-                                  title='libffi::low::call'>call</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::call'>call</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Calls a C function as specified by a CIF.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.closure_alloc.html'
                                   title='libffi::low::closure_alloc'>closure_alloc</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Allocates a closure.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.closure_free.html'
-                                  title='libffi::low::closure_free'>closure_free</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::closure_free'>closure_free</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Frees a closure.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.prep_cif.html'
-                                  title='libffi::low::prep_cif'>prep_cif</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::prep_cif'>prep_cif</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Initalizes a CIF (Call Interface) with the given ABI
 and types.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.prep_cif_var.html'
-                                  title='libffi::low::prep_cif_var'>prep_cif_var</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::prep_cif_var'>prep_cif_var</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Initalizes a CIF (Call Interface) for a varargs function.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.prep_closure.html'
-                                  title='libffi::low::prep_closure'>prep_closure</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::prep_closure'>prep_closure</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Initializes a closure with a callback function and userdata.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.prep_closure_mut.html'
-                                  title='libffi::low::prep_closure_mut'>prep_closure_mut</a></td>
-                           <td class='docblock short'>
+                                  title='libffi::low::prep_closure_mut'>prep_closure_mut</a><a title='unsafe function' href='#'><sup>⚠</sup></a></td>
+                           <td class='docblock-short'>
                                 <p>Initializes a mutable closure with a callback function and (mutable)
 userdata.</p>
                            </td>
@@ -188,28 +188,28 @@ userdata.</p>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.Callback.html'
                                   title='libffi::low::Callback'>Callback</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The type of function called by a closure.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.CallbackMut.html'
                                   title='libffi::low::CallbackMut'>CallbackMut</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The type of function called by a mutable closure.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.RawCallback.html'
                                   title='libffi::low::RawCallback'>RawCallback</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The callback type expected by <code>raw::ffi_prep_closure_loc</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.Result.html'
                                   title='libffi::low::Result'>Result</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The <code>Result</code> type specialized for libffi <code>Error</code>s.</p>
                            </td>
                        </tr></table></section>
@@ -235,6 +235,8 @@ userdata.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -266,11 +268,9 @@ userdata.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "libffi";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

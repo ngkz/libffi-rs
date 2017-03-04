@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4275' class='srclink' href='../../src/libffi/src/middle/mod.rs.html#1-489' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/libffi/middle/mod.rs.html#1-489' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Middle layer providing a somewhat safer (but still quite unsafe)
 API.</p>
 
@@ -60,47 +60,47 @@ calling a function via a CIF or closure is still unsafe because
 argument types aren’t checked. See the <a href="../high/index.html"><code>high</code></a>
 layer for closures with type-checked arguments.</p>
 </div><h2 id='reexports' class='section-header'><a href="#reexports">Reexports</a></h2>
-<table><tr><td><code>pub use low::{<a class='type' href='../../libffi/low/type.Callback.html' title='libffi::low::Callback'>Callback</a>, <a class='type' href='../../libffi/low/type.CallbackMut.html' title='libffi::low::CallbackMut'>CallbackMut</a>, <a class='struct' href='../../libffi/low/struct.CodePtr.html' title='libffi::low::CodePtr'>CodePtr</a>};</code></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
+<table><tr><td><code>pub use low::<a class='type' href='../../libffi/low/type.Callback.html' title='libffi::low::Callback'>Callback</a>;</code></td></tr><tr><td><code>pub use low::<a class='type' href='../../libffi/low/type.CallbackMut.html' title='libffi::low::CallbackMut'>CallbackMut</a>;</code></td></tr><tr><td><code>pub use low::<a class='struct' href='../../libffi/low/struct.CodePtr.html' title='libffi::low::CodePtr'>CodePtr</a>;</code></td></tr></table><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Arg.html'
                                   title='libffi::middle::Arg'>Arg</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Contains an untyped pointer to a function argument.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Builder.html'
                                   title='libffi::middle::Builder'>Builder</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Provides a builder-style API for constructing CIFs and closures.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Cif.html'
                                   title='libffi::middle::Cif'>Cif</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Describes the calling convention and types for calling a function.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Closure.html'
                                   title='libffi::middle::Closure'>Closure</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Represents a closure callable from C.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.ClosureOnce.html'
                                   title='libffi::middle::ClosureOnce'>ClosureOnce</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>A closure that owns needs-drop data.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='struct' href='struct.Type.html'
                                   title='libffi::middle::Type'>Type</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Represents a single C type.</p>
                            </td>
                        </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
@@ -108,15 +108,15 @@ layer for closures with type-checked arguments.</p>
                        <tr class=' module-item'>
                            <td><a class='enum' href='enum.FfiAbi.html'
                                   title='libffi::middle::FfiAbi'>FfiAbi</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='constants' class='section-header'><a href="#constants">Constants</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='constant' href='constant.FFI_DEFAULT_ABI.html'
-                                  title='libffi::middle::FFI_DEFAULT_ABI'>FFI_DEFAULT_ABI</a></td>
-                           <td class='docblock short'>
+                           <td><a class='constant' href='constant.ffi_abi_FFI_DEFAULT_ABI.html'
+                                  title='libffi::middle::ffi_abi_FFI_DEFAULT_ABI'>ffi_abi_FFI_DEFAULT_ABI</a></td>
+                           <td class='docblock-short'>
                                 
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
@@ -124,7 +124,7 @@ layer for closures with type-checked arguments.</p>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.arg.html'
                                   title='libffi::middle::arg'>arg</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Coerces an argument reference into the <a href="struct.Arg.html"><code>Arg</code></a>
 type.</p>
                            </td>
@@ -133,7 +133,7 @@ type.</p>
                        <tr class=' module-item'>
                            <td><a class='type' href='type.CallbackOnce.html'
                                   title='libffi::middle::CallbackOnce'>CallbackOnce</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>The type of callback invoked by a
 <a href="struct.ClosureOnce.html"><code>ClosureOnce</code></a>.</p>
                            </td>
@@ -160,6 +160,8 @@ type.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -191,11 +193,9 @@ type.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "libffi";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

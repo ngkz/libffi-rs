@@ -47,8 +47,8 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-4721' class='srclink' href='../../src/libffi/src/low.rs.html#242-253' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub unsafe fn prep_cif(cif: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>, abi: <a class='enum' href='../../libffi/low/enum.ffi_abi.html' title='libffi::low::ffi_abi'>ffi_abi</a>, nargs: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, rtype: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_type.html' title='libffi::low::ffi_type'>ffi_type</a>, atypes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_type.html' title='libffi::low::ffi_type'>ffi_type</a>) -&gt; <a class='type' href='../../libffi/low/type.Result.html' title='libffi::low::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</pre><div class='docblock'><p>Initalizes a CIF (Call Interface) with the given ABI
+               </span><a class='srclink' href='../../src/libffi/low.rs.html#242-253' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub unsafe fn prep_cif(cif: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; abi: <a class='enum' href='../../libffi/low/enum.ffi_abi.html' title='libffi::low::ffi_abi'>ffi_abi</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nargs: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rtype: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_type.html' title='libffi::low::ffi_type'>ffi_type</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; atypes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../../libffi/low/struct.ffi_type.html' title='libffi::low::ffi_type'>ffi_type</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../libffi/low/type.Result.html' title='libffi::low::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</pre><div class='docblock'><p>Initalizes a CIF (Call Interface) with the given ABI
 and types.</p>
 
 <p>We need to initialize a CIF before we can use it to call a function
@@ -84,7 +84,7 @@ undefined.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cif</span>: <span class='ident'>ffi_cif</span> <span class='op'>=</span> <span class='ident'>Default</span>::<span class='ident'>default</span>();
 
 <span class='kw'>unsafe</span> {
-    <span class='ident'>prep_cif</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cif</span>, <span class='ident'>FFI_DEFAULT_ABI</span>, <span class='number'>2</span>,
+    <span class='ident'>prep_cif</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>cif</span>, <span class='ident'>ffi_abi_FFI_DEFAULT_ABI</span>, <span class='number'>2</span>,
              <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>types</span>::<span class='ident'>pointer</span>, <span class='ident'>args</span>.<span class='ident'>as_mut_ptr</span>())
 }.<span class='ident'>unwrap</span>();</pre>
 </div></section>
@@ -110,6 +110,8 @@ undefined.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -141,11 +143,9 @@ undefined.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "libffi";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

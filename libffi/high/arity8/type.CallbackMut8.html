@@ -43,12 +43,12 @@
     </nav>
 
     <section id='main' class="content type">
-<h1 class='fqn'><span class='in-band'><a href='../../index.html'>libffi</a>::<wbr><a href='../index.html'>high</a>::<wbr><a href='index.html'>arity8</a>::<wbr><a class='type' href=''>CallbackMut8</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Type Definition <a href='../../index.html'>libffi</a>::<wbr><a href='../index.html'>high</a>::<wbr><a href='index.html'>arity8</a>::<wbr><a class='type' href=''>CallbackMut8</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-2269' class='srclink' href='../../../src/libffi/src/high/mod.rs.html#221-225' title='goto source code'>[src]</a></span></h1>
-<pre class='rust typedef'>type CallbackMut8&lt;U, A, B, C, D, E, F, G, H, R&gt; =  extern "C" fn(cif: &amp;<a class='struct' href='../../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>, result: &amp;mut R, args: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>&amp;A, &amp;B, &amp;C, &amp;D, &amp;E, &amp;F, &amp;G, &amp;H<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>, userdata: &amp;mut U);</pre><div class='docblock'><p>The type of function called from a mutable, typed closure.</p>
+               </span><a class='srclink' href='../../../src/libffi/high/mod.rs.html#221-225' title='goto source code'>[src]</a></span></h1>
+<pre class='rust typedef'>type CallbackMut8&lt;U, A, B, C, D, E, F, G, H, R&gt; = extern fn(cif: &amp;<a class='struct' href='../../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>, result: &amp;mut R, args: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a>&amp;A, &amp;B, &amp;C, &amp;D, &amp;E, &amp;F, &amp;G, &amp;H<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>, userdata: &amp;mut U);</pre><div class='docblock'><p>The type of function called from a mutable, typed closure.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -72,6 +72,8 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
@@ -103,11 +105,9 @@
     <script>
         window.rootPath = "../../../";
         window.currentCrate = "libffi";
-        window.playgroundUrl = "";
     </script>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
-    
     <script defer src="../../../search-index.js"></script>
 </body>
 </html>
