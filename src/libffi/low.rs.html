@@ -9,6 +9,7 @@
 
     <title>low.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -674,7 +675,7 @@
 
 <span class='comment'>// Converts the raw status type to a `Result`.</span>
 <span class='kw'>fn</span> <span class='ident'>status_to_result</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>status</span>: <span class='ident'>raw</span>::<span class='ident'>ffi_status</span>, <span class='ident'>good</span>: <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
-    <span class='kw'>use</span> <span class='ident'>raw</span>::<span class='ident'>ffi_status</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='ident'>raw</span>::<span class='ident'>ffi_status</span>::<span class='kw-2'>*</span>;
     <span class='kw'>match</span> <span class='ident'>status</span> {
         <span class='ident'>FFI_OK</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(<span class='ident'>good</span>),
         <span class='ident'>FFI_BAD_TYPEDEF</span> <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>Error</span>::<span class='ident'>Typedef</span>),
@@ -690,7 +691,7 @@
 <span class='doccomment'>/// collections thereof.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>, <span class='ident'>Hash</span>)]</span>
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CodePtr</span>(<span class='kw'>pub</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CodePtr</span>(<span class='kw'>pub</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
 
 <span class='comment'>// How useful is this type? Does it need all the methods?</span>
 <span class='kw'>impl</span> <span class='ident'>CodePtr</span> {
@@ -699,15 +700,15 @@
     <span class='doccomment'>/// This is useful mainly for talking to C APIs that take untyped</span>
     <span class='doccomment'>/// callbacks specified in the API as having type `void(*)()`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_fun</span>(<span class='ident'>fun</span>: <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>()) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>CodePtr</span>(<span class='ident'>fun</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+        <span class='ident'>CodePtr</span>(<span class='ident'>fun</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
     }
 
     <span class='doccomment'>/// Initializes a code pointer from a void pointer.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This is the other common type used in APIs (or at least in</span>
     <span class='doccomment'>/// libffi) for untyped callback arguments.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_ptr</span>(<span class='ident'>fun</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>CodePtr</span>(<span class='ident'>fun</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_ptr</span>(<span class='ident'>fun</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
+        <span class='ident'>CodePtr</span>(<span class='ident'>fun</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>)
     }
 
     <span class='doccomment'>/// Gets the code pointer typed as a C function pointer.</span>
@@ -723,7 +724,7 @@
     <span class='doccomment'>/// cast before it is called.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_fun</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>() {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='kw-2'>&amp;</span><span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>)
+            <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='kw-2'>&amp;</span><span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>)
         }
     }
 
@@ -743,14 +744,14 @@
     <span class='doccomment'>/// function actually has type `void(*)()`, it will need to be</span>
     <span class='doccomment'>/// cast before it is called.</span>
     <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>as_safe_fun</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>() {
-        <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='kw-2'>&amp;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>)
+        <span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>, <span class='kw-2'>&amp;</span><span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='number'>0</span>)
     }
 
     <span class='doccomment'>/// Gets the code pointer typed as a `const void*`.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This is the other common type used in APIs (or at least in</span>
     <span class='doccomment'>/// libffi) for untyped callback arguments.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span> {
         <span class='self'>self</span>.<span class='number'>0</span>
     }
 
@@ -758,7 +759,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// This is the other common type used in APIs (or at least in</span>
     <span class='doccomment'>/// libffi) for untyped callback arguments.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_mut_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_mut_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span> {
         <span class='self'>self</span>.<span class='number'>0</span>
     }
 }
@@ -887,11 +888,11 @@
 <span class='doccomment'>///              &amp;mut types::pointer, args.as_mut_ptr())</span>
 <span class='doccomment'>/// }.unwrap();</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_cif</span>(<span class='ident'>cif</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_cif</span>(<span class='ident'>cif</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
                        <span class='ident'>abi</span>: <span class='ident'>ffi_abi</span>,
                        <span class='ident'>nargs</span>: <span class='ident'>usize</span>,
-                       <span class='ident'>rtype</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>,
-                       <span class='ident'>atypes</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>)
+                       <span class='ident'>rtype</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>,
+                       <span class='ident'>atypes</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>)
                        <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>
 {
     <span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_prep_cif</span>(<span class='ident'>cif</span>, <span class='ident'>abi</span>,
@@ -927,12 +928,12 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// `Ok(())` for success or `Err(e)` for failure.</span>
 <span class='doccomment'>///</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_cif_var</span>(<span class='ident'>cif</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_cif_var</span>(<span class='ident'>cif</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
                            <span class='ident'>abi</span>: <span class='ident'>ffi_abi</span>,
                            <span class='ident'>nfixedargs</span>: <span class='ident'>usize</span>,
                            <span class='ident'>ntotalargs</span>: <span class='ident'>usize</span>,
-                           <span class='ident'>rtype</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>,
-                           <span class='ident'>atypes</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>)
+                           <span class='ident'>rtype</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>,
+                           <span class='ident'>atypes</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_type</span>)
                            <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>
 {
     <span class='kw'>let</span> <span class='ident'>status</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_prep_cif_var</span>(<span class='ident'>cif</span>, <span class='ident'>abi</span>,
@@ -978,14 +979,14 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// assert_eq!(9, result);</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>call</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>cif</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>call</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>cif</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
                       <span class='ident'>fun</span>:  <span class='ident'>CodePtr</span>,
-                      <span class='ident'>args</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>R</span>
+                      <span class='ident'>args</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>) <span class='op'>-&gt;</span> <span class='ident'>R</span>
 {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>result</span>: <span class='ident'>R</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>uninitialized</span>();
     <span class='ident'>raw</span>::<span class='ident'>ffi_call</span>(<span class='ident'>cif</span>,
-                  <span class='prelude-val'>Some</span>(<span class='op'>*</span><span class='ident'>fun</span>.<span class='ident'>as_safe_fun</span>()),
-                  <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>result</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>R</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+                  <span class='prelude-val'>Some</span>(<span class='kw-2'>*</span><span class='ident'>fun</span>.<span class='ident'>as_safe_fun</span>()),
+                  <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>result</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>R</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
                   <span class='ident'>args</span>);
     <span class='ident'>result</span>
 }
@@ -1008,12 +1009,12 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// let (closure_handle, code_ptr) = closure_alloc();</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>closure_alloc</span>() <span class='op'>-&gt;</span> (<span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>, <span class='ident'>CodePtr</span>) {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>closure_alloc</span>() <span class='op'>-&gt;</span> (<span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>, <span class='ident'>CodePtr</span>) {
     <span class='kw'>unsafe</span> {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>code_pointer</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>uninitialized</span>();
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>code_pointer</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>uninitialized</span>();
         <span class='kw'>let</span> <span class='ident'>closure</span> <span class='op'>=</span> <span class='ident'>raw</span>::<span class='ident'>ffi_closure_alloc</span>(<span class='ident'>mem</span>::<span class='ident'>size_of</span>::<span class='op'>&lt;</span><span class='ident'>ffi_closure</span><span class='op'>&gt;</span>(),
                                              <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>code_pointer</span>);
-        (<span class='ident'>closure</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>, <span class='ident'>CodePtr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>code_pointer</span>))
+        (<span class='ident'>closure</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>, <span class='ident'>CodePtr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>code_pointer</span>))
     }
 }
 
@@ -1035,8 +1036,8 @@
 <span class='doccomment'>///     closure_free(closure_handle);</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>closure_free</span>(<span class='ident'>closure</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>) {
-    <span class='ident'>raw</span>::<span class='ident'>ffi_closure_free</span>(<span class='ident'>closure</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>closure_free</span>(<span class='ident'>closure</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>) {
+    <span class='ident'>raw</span>::<span class='ident'>ffi_closure_free</span>(<span class='ident'>closure</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
 }
 
 <span class='doccomment'>/// The type of function called by a closure.</span>
@@ -1047,7 +1048,7 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Callback</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>
     <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>cif</span>:      <span class='kw-2'>&amp;</span><span class='ident'>ffi_cif</span>,
                            <span class='ident'>result</span>:   <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>,
-                           <span class='ident'>args</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+                           <span class='ident'>args</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
                            <span class='ident'>userdata</span>: <span class='kw-2'>&amp;</span><span class='ident'>U</span>);
 
 <span class='doccomment'>/// The type of function called by a mutable closure.</span>
@@ -1058,15 +1059,15 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>CallbackMut</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>
     <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>cif</span>:      <span class='kw-2'>&amp;</span><span class='ident'>ffi_cif</span>,
                            <span class='ident'>result</span>:   <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>R</span>,
-                           <span class='ident'>args</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
+                           <span class='ident'>args</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_void</span>,
                            <span class='ident'>userdata</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>U</span>);
 
 <span class='doccomment'>/// The callback type expected by `raw::ffi_prep_closure_loc`.</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>RawCallback</span>
-    <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>cif</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
-                           <span class='ident'>result</span>:   <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
-                           <span class='ident'>args</span>:     <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
-                           <span class='ident'>userdata</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+    <span class='op'>=</span> <span class='kw'>unsafe</span> <span class='kw'>extern</span> <span class='string'>&quot;C&quot;</span> <span class='kw'>fn</span>(<span class='ident'>cif</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+                           <span class='ident'>result</span>:   <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+                           <span class='ident'>args</span>:     <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+                           <span class='ident'>userdata</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
 
 <span class='doccomment'>/// Initializes a closure with a callback function and userdata.</span>
 <span class='doccomment'>///</span>
@@ -1142,10 +1143,10 @@
 <span class='doccomment'>///     assert_eq!(22, twice(add5, 12));</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_closure</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>closure</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>,
-                                 <span class='ident'>cif</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_closure</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>closure</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>,
+                                 <span class='ident'>cif</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
                                  <span class='ident'>callback</span>: <span class='ident'>Callback</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>,
-                                 <span class='ident'>userdata</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>U</span>,
+                                 <span class='ident'>userdata</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>U</span>,
                                  <span class='ident'>code</span>:     <span class='ident'>CodePtr</span>)
     <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>
 {
@@ -1153,7 +1154,7 @@
         (<span class='ident'>closure</span>,
          <span class='ident'>cif</span>,
          <span class='prelude-val'>Some</span>(<span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='ident'>Callback</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>, <span class='ident'>RawCallback</span><span class='op'>&gt;</span>(<span class='ident'>callback</span>)),
-         <span class='ident'>userdata</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+         <span class='ident'>userdata</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
          <span class='ident'>code</span>.<span class='ident'>as_mut_ptr</span>());
     <span class='ident'>status_to_result</span>(<span class='ident'>status</span>, ())
 }
@@ -1234,10 +1235,10 @@
 <span class='doccomment'>///     assert_eq!(19, twice(add5, 1));</span>
 <span class='doccomment'>/// }</span>
 <span class='doccomment'>/// ```</span>
-<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_closure_mut</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>closure</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>,
-                                     <span class='ident'>cif</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
+<span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>prep_closure_mut</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>(<span class='ident'>closure</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_closure</span>,
+                                     <span class='ident'>cif</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>ffi_cif</span>,
                                      <span class='ident'>callback</span>: <span class='ident'>CallbackMut</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>,
-                                     <span class='ident'>userdata</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>U</span>,
+                                     <span class='ident'>userdata</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>U</span>,
                                      <span class='ident'>code</span>:     <span class='ident'>CodePtr</span>)
     <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>()<span class='op'>&gt;</span>
 {
@@ -1245,7 +1246,7 @@
         (<span class='ident'>closure</span>,
          <span class='ident'>cif</span>,
          <span class='prelude-val'>Some</span>(<span class='ident'>mem</span>::<span class='ident'>transmute</span>::<span class='op'>&lt;</span><span class='ident'>CallbackMut</span><span class='op'>&lt;</span><span class='ident'>U</span>, <span class='ident'>R</span><span class='op'>&gt;</span>, <span class='ident'>RawCallback</span><span class='op'>&gt;</span>(<span class='ident'>callback</span>)),
-         <span class='ident'>userdata</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
+         <span class='ident'>userdata</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>,
          <span class='ident'>code</span>.<span class='ident'>as_mut_ptr</span>());
     <span class='ident'>status_to_result</span>(<span class='ident'>status</span>, ())
 }

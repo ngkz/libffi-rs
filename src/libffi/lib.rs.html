@@ -9,6 +9,7 @@
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -156,7 +157,7 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ```toml</span>
 <span class='doccomment'>//! [dependencies]</span>
-<span class='doccomment'>//! libffi = &quot;0.4.1&quot;</span>
+<span class='doccomment'>//! libffi = &quot;0.5.0&quot;</span>
 <span class='doccomment'>//! ```</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! to your `Cargo.toml` and</span>
@@ -225,7 +226,7 @@
 <span class='doccomment'>/// as the basis for higher-level bindings, but you can see the [C libffi</span>
 <span class='doccomment'>/// documentation](http://www.atmark-techno.com/~yashi/libffi.html).</span>
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>raw</span> {
-    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>libffi_sys</span>::<span class='op'>*</span>;
+    <span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>libffi_sys</span>::<span class='kw-2'>*</span>;
 }
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>high</span>;

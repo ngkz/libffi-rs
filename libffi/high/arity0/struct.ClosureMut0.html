@@ -9,6 +9,7 @@
 
     <title>libffi::high::arity0::ClosureMut0 - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -51,7 +52,7 @@
 <pre class='rust struct'>pub struct ClosureMut0&lt;'a, R&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A mutable, typed closure with the given argument and
 result types.</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a, R:&nbsp;<a class='trait' href='../../../libffi/high/types/trait.CType.html' title='libffi::high::types::CType'>CType</a>&gt; <a class='struct' href='../../../libffi/high/arity0/struct.ClosureMut0.html' title='libffi::high::arity0::ClosureMut0'>ClosureMut0</a>&lt;'a, R&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/libffi/high/mod.rs.html#234-244' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;Callback&gt;(callback: &amp;'a mut Callback) -&gt; Self <span class='where'>where Callback: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>() -&gt; R + 'a</span></code></span></h4>
+<div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;Callback&gt;(callback: &amp;'a mut Callback) -&gt; Self <span class='where fmt-newline'>where Callback: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>() -&gt; R + 'a</span></code></span></h4>
 <div class='docblock'><p>Constructs a typed closure callable from C from a
 Rust closure.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;'a, R&gt; <a class='struct' href='../../../libffi/high/arity0/struct.ClosureMut0.html' title='libffi::high::arity0::ClosureMut0'>ClosureMut0</a>&lt;'a, R&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/libffi/high/mod.rs.html#246-274' title='goto source code'>[src]</a></span></h3>
@@ -64,7 +65,7 @@ describing the calling convention for the resulting
 function, a callback for the function to call, and
 userdata to pass to the callback.</p>
 </div></div><h3 class='impl'><span class='in-band'><code>impl&lt;'a, R&gt; <a class='struct' href='../../../libffi/high/arity0/struct.ClosureMut0.html' title='libffi::high::arity0::ClosureMut0'>ClosureMut0</a>&lt;'a, R&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/libffi/high/mod.rs.html#276-303' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new_with_cif' class='method'><span id='new_with_cif.v' class='invisible'><code>fn <a href='#method.new_with_cif' class='fnname'>new_with_cif</a>&lt;Callback&gt;(cif: <a class='struct' href='../../../libffi/high/arity0/struct.Cif0.html' title='libffi::high::arity0::Cif0'>Cif0</a>&lt;R&gt;, callback: &amp;'a mut Callback) -&gt; Self <span class='where'>where Callback: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>() -&gt; R + 'a</span></code></span></h4>
+<div class='impl-items'><h4 id='method.new_with_cif' class='method'><span id='new_with_cif.v' class='invisible'><code>fn <a href='#method.new_with_cif' class='fnname'>new_with_cif</a>&lt;Callback&gt;(cif: <a class='struct' href='../../../libffi/high/arity0/struct.Cif0.html' title='libffi::high::arity0::Cif0'>Cif0</a>&lt;R&gt;, callback: &amp;'a mut Callback) -&gt; Self <span class='where fmt-newline'>where Callback: <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.FnMut.html' title='core::ops::FnMut'>FnMut</a>() -&gt; R + 'a</span></code></span></h4>
 <div class='docblock'><p>Constructs a typed closure callable from C from a CIF
 describing the calling convention for the resulting
 function and the Rust closure to call.</p>

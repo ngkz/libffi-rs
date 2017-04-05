@@ -9,6 +9,7 @@
 
     <title>libffi::low::CallbackMut - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -48,7 +49,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/libffi/low.rs.html#410-414' title='goto source code'>[src]</a></span></h1>
-<pre class='rust typedef'>type CallbackMut&lt;U, R&gt; = unsafe extern fn(cif: &amp;<a class='struct' href='../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>, result: &amp;mut R, args: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='enum' href='https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html' title='std::os::raw::c_void'>c_void</a>, userdata: &amp;mut U);</pre><div class='docblock'><p>The type of function called by a mutable closure.</p>
+<pre class='rust typedef'>type CallbackMut&lt;U, R&gt; = unsafe extern fn(_: &amp;<a class='struct' href='../../libffi/low/struct.ffi_cif.html' title='libffi::low::ffi_cif'>ffi_cif</a>, _: &amp;mut R, _: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*const </a><a class='enum' href='https://doc.rust-lang.org/nightly/std/os/raw/enum.c_void.html' title='std::os::raw::c_void'>c_void</a>, _: &amp;mut U);</pre><div class='docblock'><p>The type of function called by a mutable closure.</p>
 
 <p><code>U</code> is the type of the user data captured by the closure and passed
 to the callback, and <code>R</code> is the type of the result. The parameters

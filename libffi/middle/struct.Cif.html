@@ -9,6 +9,7 @@
 
     <title>libffi::middle::Cif - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -65,15 +66,15 @@ those referenced objects.</p>
     <span class='kw'>return</span> <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>y</span>;
 }
 
-<span class='kw'>use</span> <span class='ident'>libffi</span>::<span class='ident'>middle</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>libffi</span>::<span class='ident'>middle</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>let</span> <span class='ident'>args</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Type</span>::<span class='ident'>f64</span>(), <span class='ident'>Type</span>::<span class='ident'>pointer</span>()];
 <span class='kw'>let</span> <span class='ident'>cif</span> <span class='op'>=</span> <span class='ident'>Cif</span>::<span class='ident'>new</span>(<span class='ident'>args</span>.<span class='ident'>into_iter</span>(), <span class='ident'>Type</span>::<span class='ident'>f64</span>());
 
-<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>cif</span>.<span class='ident'>call</span>(<span class='ident'>CodePtr</span>(<span class='ident'>add</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> _), <span class='kw-2'>&amp;</span>[<span class='ident'>arg</span>(<span class='kw-2'>&amp;</span><span class='number'>5</span>), <span class='ident'>arg</span>(<span class='op'>&amp;&amp;</span><span class='number'>6</span>)]) };
+<span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='ident'>cif</span>.<span class='ident'>call</span>(<span class='ident'>CodePtr</span>(<span class='ident'>add</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> _), <span class='kw-2'>&amp;</span>[<span class='ident'>arg</span>(<span class='kw-2'>&amp;</span><span class='number'>5</span>), <span class='ident'>arg</span>(<span class='op'>&amp;&amp;</span><span class='number'>6</span>)]) };
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>n</span>);</pre>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../libffi/middle/struct.Cif.html' title='libffi::middle::Cif'>Cif</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/libffi/middle/mod.rs.html#109-176' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;I&gt;(args: I, result: <a class='struct' href='../../libffi/middle/struct.Type.html' title='libffi::middle::Type'>Type</a>) -&gt; Self <span class='where'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.ExactSizeIterator.html' title='core::iter::traits::ExactSizeIterator'>ExactSizeIterator</a>&lt;Item=<a class='struct' href='../../libffi/middle/struct.Type.html' title='libffi::middle::Type'>Type</a>&gt;</span></code></span></h4>
+<div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;I&gt;(args: I, result: <a class='struct' href='../../libffi/middle/struct.Type.html' title='libffi::middle::Type'>Type</a>) -&gt; Self <span class='where fmt-newline'>where I: <a class='trait' href='https://doc.rust-lang.org/nightly/core/iter/traits/trait.ExactSizeIterator.html' title='core::iter::traits::ExactSizeIterator'>ExactSizeIterator</a>&lt;Item=<a class='struct' href='../../libffi/middle/struct.Type.html' title='libffi::middle::Type'>Type</a>&gt;</span></code></span></h4>
 <div class='docblock'><p>Creates a new CIF for the given argument and result types.</p>
 
 <p>Takes ownership of the argument and result

@@ -9,6 +9,7 @@
 
     <title>types.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -540,8 +541,8 @@
 <span class='comment'>// since this is what libffi understands. Below we wrap them with</span>
 <span class='comment'>// types that implement Drop and Clone.</span>
 
-<span class='kw'>type</span> <span class='ident'>Type_</span>      <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span>;
-<span class='kw'>type</span> <span class='ident'>TypeArray_</span> <span class='op'>=</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>Type_</span>;
+<span class='kw'>type</span> <span class='ident'>Type_</span>      <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span>;
+<span class='kw'>type</span> <span class='ident'>TypeArray_</span> <span class='op'>=</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>Type_</span>;
 
 <span class='comment'>// Informal indication that the object should be considered owned by</span>
 <span class='comment'>// the given reference.</span>
@@ -577,17 +578,17 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// This can be used to construct a struct type or as the arguments</span>
 <span class='doccomment'>/// when creating a [`Cif`](struct.Cif.html).</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TypeArray</span>(<span class='ident'>Unique</span><span class='op'>&lt;</span><span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span><span class='op'>&gt;</span>);
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TypeArray</span>(<span class='ident'>Unique</span><span class='op'>&lt;</span><span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span><span class='op'>&gt;</span>);
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>Type</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>formatter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='ident'>formatter</span>.<span class='ident'>write_fmt</span>(<span class='macro'>format_args</span><span class='macro'>!</span>(<span class='string'>&quot;Type({:?})&quot;</span>, <span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>))
+        <span class='ident'>formatter</span>.<span class='ident'>write_fmt</span>(<span class='macro'>format_args</span><span class='macro'>!</span>(<span class='string'>&quot;Type({:?})&quot;</span>, <span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>))
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Debug</span> <span class='kw'>for</span> <span class='ident'>TypeArray</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>formatter</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
-        <span class='ident'>formatter</span>.<span class='ident'>write_fmt</span>(<span class='macro'>format_args</span><span class='macro'>!</span>(<span class='string'>&quot;TypeArray({:?})&quot;</span>, <span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>))
+        <span class='ident'>formatter</span>.<span class='ident'>write_fmt</span>(<span class='macro'>format_args</span><span class='macro'>!</span>(<span class='string'>&quot;TypeArray({:?})&quot;</span>, <span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>))
     }
 }
 
@@ -595,7 +596,7 @@
 <span class='doccomment'>/// null terminator.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_array_len</span>(<span class='kw-2'>mut</span> <span class='ident'>array</span>: <span class='ident'>TypeArray_</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>count</span>   <span class='op'>=</span> <span class='number'>0</span>;
-    <span class='kw'>while</span> <span class='op'>!</span>(<span class='op'>*</span><span class='ident'>array</span>).<span class='ident'>is_null</span>() {
+    <span class='kw'>while</span> <span class='op'>!</span>(<span class='kw-2'>*</span><span class='ident'>array</span>).<span class='ident'>is_null</span>() {
         <span class='ident'>count</span> <span class='op'>+=</span> <span class='number'>1</span>;
         <span class='ident'>array</span> <span class='op'>=</span> <span class='ident'>array</span>.<span class='ident'>offset</span>(<span class='number'>1</span>);
     }
@@ -608,7 +609,7 @@
                     <span class='kw'>as</span> <span class='ident'>TypeArray_</span>;
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>array</span>.<span class='ident'>is_null</span>(),
             <span class='string'>&quot;ffi_type_array_create_empty: out of memory&quot;</span>);
-    <span class='op'>*</span><span class='ident'>array</span>.<span class='ident'>offset</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>::<span class='op'>&lt;</span><span class='ident'>low</span>::<span class='ident'>ffi_type</span><span class='op'>&gt;</span>() <span class='kw'>as</span> <span class='ident'>Type_</span>;
+    <span class='kw-2'>*</span><span class='ident'>array</span>.<span class='ident'>offset</span>(<span class='ident'>len</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='ident'>ptr</span>::<span class='ident'>null_mut</span>::<span class='op'>&lt;</span><span class='ident'>low</span>::<span class='ident'>ffi_type</span><span class='op'>&gt;</span>() <span class='kw'>as</span> <span class='ident'>Type_</span>;
     <span class='ident'>array</span>
 }
 
@@ -620,7 +621,7 @@
     <span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>elements</span>.<span class='ident'>len</span>();
     <span class='kw'>let</span> <span class='ident'>new</span>  <span class='op'>=</span> <span class='ident'>ffi_type_array_create_empty</span>(<span class='ident'>size</span>);
     <span class='kw'>for</span> (<span class='ident'>i</span>, <span class='ident'>element</span>) <span class='kw'>in</span> <span class='ident'>elements</span>.<span class='ident'>enumerate</span>() {
-        <span class='op'>*</span><span class='ident'>new</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='op'>*</span><span class='ident'>element</span>.<span class='number'>0</span>;
+        <span class='kw-2'>*</span><span class='ident'>new</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='kw-2'>*</span><span class='ident'>element</span>.<span class='number'>0</span>;
     }
 
     <span class='ident'>new</span>
@@ -634,10 +635,10 @@
     <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>new</span>.<span class='ident'>is_null</span>(),
             <span class='string'>&quot;ffi_type_struct_create_raw: out of memory&quot;</span>);
 
-    (<span class='op'>*</span><span class='ident'>new</span>).<span class='ident'>size</span>      <span class='op'>=</span> <span class='number'>0</span>;
-    (<span class='op'>*</span><span class='ident'>new</span>).<span class='ident'>alignment</span> <span class='op'>=</span> <span class='number'>0</span>;
-    (<span class='op'>*</span><span class='ident'>new</span>).<span class='ident'>type_</span>     <span class='op'>=</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span>;
-    (<span class='op'>*</span><span class='ident'>new</span>).<span class='ident'>elements</span>  <span class='op'>=</span> <span class='ident'>elements</span>;
+    (<span class='kw-2'>*</span><span class='ident'>new</span>).<span class='ident'>size</span>      <span class='op'>=</span> <span class='number'>0</span>;
+    (<span class='kw-2'>*</span><span class='ident'>new</span>).<span class='ident'>alignment</span> <span class='op'>=</span> <span class='number'>0</span>;
+    (<span class='kw-2'>*</span><span class='ident'>new</span>).<span class='ident'>type_</span>     <span class='op'>=</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span>;
+    (<span class='kw-2'>*</span><span class='ident'>new</span>).<span class='ident'>elements</span>  <span class='op'>=</span> <span class='ident'>elements</span>;
 
     <span class='ident'>new</span>
 }
@@ -656,7 +657,7 @@
     <span class='kw'>let</span> <span class='ident'>new</span>  <span class='op'>=</span> <span class='ident'>ffi_type_array_create_empty</span>(<span class='ident'>size</span>);
 
     <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span> .. <span class='ident'>size</span> {
-        <span class='op'>*</span><span class='ident'>new</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='ident'>ffi_type_clone</span>(<span class='op'>*</span><span class='ident'>old</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>));
+        <span class='kw-2'>*</span><span class='ident'>new</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>) <span class='op'>=</span> <span class='ident'>ffi_type_clone</span>(<span class='kw-2'>*</span><span class='ident'>old</span>.<span class='ident'>offset</span>(<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>isize</span>));
     }
 
     <span class='ident'>new</span>
@@ -664,8 +665,8 @@
 
 <span class='doccomment'>/// Makes a copy of a type.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_clone</span>(<span class='ident'>old</span>: <span class='ident'>Type_</span>) <span class='op'>-&gt;</span> <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>Type_</span><span class='op'>&gt;</span> {
-    <span class='kw'>if</span> (<span class='op'>*</span><span class='ident'>old</span>).<span class='ident'>type_</span> <span class='op'>==</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span> {
-        <span class='ident'>ffi_type_struct_create_raw</span>(<span class='ident'>ffi_type_array_clone</span>((<span class='op'>*</span><span class='ident'>old</span>).<span class='ident'>elements</span>))
+    <span class='kw'>if</span> (<span class='kw-2'>*</span><span class='ident'>old</span>).<span class='ident'>type_</span> <span class='op'>==</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span> {
+        <span class='ident'>ffi_type_struct_create_raw</span>(<span class='ident'>ffi_type_array_clone</span>((<span class='kw-2'>*</span><span class='ident'>old</span>).<span class='ident'>elements</span>))
     } <span class='kw'>else</span> {
         <span class='ident'>old</span>
     }
@@ -674,44 +675,44 @@
 <span class='doccomment'>/// Destroys a `TypeArray_` and all of its elements.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_array_destroy</span>(<span class='ident'>victim</span>: <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>TypeArray_</span><span class='op'>&gt;</span>) {
     <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>current</span> <span class='op'>=</span> <span class='ident'>victim</span>;
-    <span class='kw'>while</span> <span class='op'>!</span>(<span class='op'>*</span><span class='ident'>current</span>).<span class='ident'>is_null</span>() {
-        <span class='ident'>ffi_type_destroy</span>(<span class='op'>*</span><span class='ident'>current</span>);
+    <span class='kw'>while</span> <span class='op'>!</span>(<span class='kw-2'>*</span><span class='ident'>current</span>).<span class='ident'>is_null</span>() {
+        <span class='ident'>ffi_type_destroy</span>(<span class='kw-2'>*</span><span class='ident'>current</span>);
         <span class='ident'>current</span> <span class='op'>=</span> <span class='ident'>current</span>.<span class='ident'>offset</span>(<span class='number'>1</span>);
     }
 
-    <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>victim</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>);
+    <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>victim</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>);
 }
 
 <span class='doccomment'>/// Destroys a `Type_` if it was dynamically allocated.</span>
 <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>ffi_type_destroy</span>(<span class='ident'>victim</span>: <span class='ident'>Owned</span><span class='op'>&lt;</span><span class='ident'>Type_</span><span class='op'>&gt;</span>) {
-    <span class='kw'>if</span> (<span class='op'>*</span><span class='ident'>victim</span>).<span class='ident'>type_</span> <span class='op'>==</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span> {
-        <span class='ident'>ffi_type_array_destroy</span>((<span class='op'>*</span><span class='ident'>victim</span>).<span class='ident'>elements</span>);
-        <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>victim</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>);
+    <span class='kw'>if</span> (<span class='kw-2'>*</span><span class='ident'>victim</span>).<span class='ident'>type_</span> <span class='op'>==</span> <span class='ident'>low</span>::<span class='ident'>type_tag</span>::<span class='ident'>STRUCT</span> {
+        <span class='ident'>ffi_type_array_destroy</span>((<span class='kw-2'>*</span><span class='ident'>victim</span>).<span class='ident'>elements</span>);
+        <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='ident'>victim</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>libc</span>::<span class='ident'>c_void</span>);
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Type</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='kw'>unsafe</span> { <span class='ident'>ffi_type_destroy</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>) }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi_type_destroy</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>) }
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>TypeArray</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='kw'>unsafe</span> { <span class='ident'>ffi_type_array_destroy</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>) }
+        <span class='kw'>unsafe</span> { <span class='ident'>ffi_type_array_destroy</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>) }
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>Type</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='kw'>unsafe</span> { <span class='ident'>Type</span>(<span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='ident'>ffi_type_clone</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>))) }
+        <span class='kw'>unsafe</span> { <span class='ident'>Type</span>(<span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='ident'>ffi_type_clone</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>))) }
     }
 }
 
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>TypeArray</span> {
     <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>TypeArray</span>(<span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='ident'>ffi_type_array_clone</span>(<span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>)))
+            <span class='ident'>TypeArray</span>(<span class='ident'>Unique</span>::<span class='ident'>new</span>(<span class='ident'>ffi_type_array_clone</span>(<span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>)))
         }
     }
 }
@@ -934,8 +935,8 @@
     <span class='doccomment'>/// This method may be useful for interacting with the</span>
     <span class='doccomment'>/// [`low`](../low/index.html) and</span>
     <span class='doccomment'>/// [`raw`](../raw/index.html) layers.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_raw_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span> {
-        <span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_raw_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span> {
+        <span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>
     }
 }
 
@@ -955,14 +956,14 @@
     <span class='doccomment'>/// This method may be useful for interacting with the</span>
     <span class='doccomment'>/// [`low`](../low/index.html) and</span>
     <span class='doccomment'>/// [`raw`](../raw/index.html) layers.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_raw_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span> {
-        <span class='op'>*</span><span class='self'>self</span>.<span class='number'>0</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>as_raw_ptr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>low</span>::<span class='ident'>ffi_type</span> {
+        <span class='kw-2'>*</span><span class='self'>self</span>.<span class='number'>0</span>
     }
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
-    <span class='kw'>use</span> <span class='kw'>super</span>::<span class='op'>*</span>;
+    <span class='kw'>use</span> <span class='kw'>super</span>::<span class='kw-2'>*</span>;
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>create_u64</span>() {
