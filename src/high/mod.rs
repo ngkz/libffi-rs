@@ -4,7 +4,8 @@
 //! The main facility here is given by the structs
 //! <code>Closure<em>N</em></code>,
 //! <code>Closure<span></span>Mut<em>N</em></code>,
-//! and <code>Closure<span></span>Once<em>N</em></code>,
+//! <code>Closure<span></span>Once<em>N</em></code>,
+//! and <code>Closure<span></span>Owned<em>N</em></code>,
 //! for natural numbers *`N`*
 //! from `0` to `12` (as of
 //! now). These represent C closures of *`N`* arguments, which can be
@@ -81,7 +82,8 @@ macro_rules! define_closure_mod {
     (
         $module:ident $cif:ident
           $callback:ident $callback_mut:ident $callback_once:ident
-          $closure:ident $closure_mut:ident $closure_once:ident;
+          $closure:ident $closure_mut:ident $closure_once:ident
+          $closure_owned:ident;
         $( $T:ident )*
     )
         =>
@@ -395,6 +397,85 @@ macro_rules! define_closure_mod {
                     }
                 }
             }
+
+            /// An owned, typed closure with the given argument and
+            /// result types.
+            pub struct $closure_owned<$( $T, )* R> {
+                untyped: middle::ClosureOwned,
+                _marker: PhantomData<fn($( $T, )*) -> R>,
+            }
+
+            impl<$($T: CType,)* R: CType> $closure_owned<$($T,)* R> {
+                /// Constructs a typed closure callable from C from a
+                /// Rust closure.
+                pub fn new<Callback>(callback: Callback) -> Self
+                    where Callback: FnMut($( $T, )*) -> R + Any
+                {
+                    Self::new_with_cif($cif::reify(), callback)
+                }
+            }
+
+            impl<$( $T: Copy, )* R> $closure_owned<$( $T, )* R> {
+                /// Constructs a typed closure callable from C from a CIF
+                /// describing the calling convention for the resulting
+                /// function and the Rust closure to call.
+                pub fn new_with_cif<Callback>(cif: $cif<$( $T, )* R>,
+                                              callback: Callback) -> Self
+                    where Callback: FnMut($( $T, )*) -> R + Any
+                {
+                    Self::from_parts(cif,
+                                     Self::static_callback,
+                                     callback)
+                }
+
+                #[allow(non_snake_case)]
+                extern "C" fn static_callback<Callback>
+                    (_cif:     &::low::ffi_cif,
+                     result:   &mut R,
+                     &($( &$T, )*):
+                               &($( &$T, )*),
+                     userdata: &mut Callback)
+                  where Callback: FnMut($( $T, )*) -> R
+                {
+                    abort_on_panic!("Cannot panic inside FFI callback", {
+                        unsafe {
+                            ptr::write(result, userdata($( $T, )*));
+                        }
+                    });
+                }
+            }
+
+            impl<$( $T, )* R> $closure_owned<$( $T, )* R> {
+                /// Gets the C code pointer that is used to invoke the
+                /// closure.
+                pub fn code_ptr(&self) -> &extern "C" fn($( $T, )*) -> R {
+                    unsafe {
+                        mem::transmute(self.untyped.code_ptr())
+                    }
+                }
+
+                /// Constructs a typed closure callable from C from a CIF
+                /// describing the calling convention for the resulting
+                /// function, a callback for the function to call, and
+                /// userdata to pass to the callback.
+                pub fn from_parts<U: Any>(
+                    cif:      $cif<$( $T, )* R>,
+                    callback: $callback_mut<U, $( $T, )* R>,
+                    userdata: U)
+                    -> Self
+                {
+                    let callback: middle::CallbackMut<U, R>
+                        = unsafe { mem::transmute(callback) };
+                    let closure
+                        = middle::ClosureOwned::new(cif.untyped,
+                                                    callback,
+                                                    userdata);
+                    $closure_owned {
+                        untyped: closure,
+                        _marker: PhantomData,
+                    }
+                }
+            }
         }
 
         pub use self::$module::*;
@@ -403,55 +484,55 @@ macro_rules! define_closure_mod {
 
 define_closure_mod!(arity0 Cif0
                     Callback0 CallbackMut0 CallbackOnce0
-                    Closure0 ClosureMut0 ClosureOnce0;
+                    Closure0 ClosureMut0 ClosureOnce0 ClosureOwned0;
                     );
 define_closure_mod!(arity1 Cif1
                     Callback1 CallbackMut1 CallbackOnce1
-                    Closure1 ClosureMut1 ClosureOnce1;
+                    Closure1 ClosureMut1 ClosureOnce1 ClosureOwned1;
                     A);
 define_closure_mod!(arity2 Cif2
                     Callback2 CallbackMut2 CallbackOnce2
-                    Closure2 ClosureMut2 ClosureOnce2;
+                    Closure2 ClosureMut2 ClosureOnce2 ClosureOwned2;
                     A B);
 define_closure_mod!(arity3 Cif3
                     Callback3 CallbackMut3 CallbackOnce3
-                    Closure3 ClosureMut3 ClosureOnce3;
+                    Closure3 ClosureMut3 ClosureOnce3 ClosureOwned3;
                     A B C);
 define_closure_mod!(arity4 Cif4
                     Callback4 CallbackMut4 CallbackOnce4
-                    Closure4 ClosureMut4 ClosureOnce4;
+                    Closure4 ClosureMut4 ClosureOnce4 ClosureOwned4;
                     A B C D);
 define_closure_mod!(arity5 Cif5
                     Callback5 CallbackMut5 CallbackOnce5
-                    Closure5 ClosureMut5 ClosureOnce5;
+                    Closure5 ClosureMut5 ClosureOnce5 ClosureOwned5;
                     A B C D E);
 define_closure_mod!(arity6 Cif6
                     Callback6 CallbackMut6 CallbackOnce6
-                    Closure6 ClosureMut6 ClosureOnce6;
+                    Closure6 ClosureMut6 ClosureOnce6 ClosureOwned6;
                     A B C D E F);
 define_closure_mod!(arity7 Cif7
                     Callback7 CallbackMut7 CallbackOnce7
-                    Closure7 ClosureMut7 ClosureOnce7;
+                    Closure7 ClosureMut7 ClosureOnce7 ClosureOwned7;
                     A B C D E F G);
 define_closure_mod!(arity8 Cif8
                     Callback8 CallbackMut8 CallbackOnce8
-                    Closure8 ClosureMut8 ClosureOnce8;
+                    Closure8 ClosureMut8 ClosureOnce8 ClosureOwned8;
                     A B C D E F G H);
 define_closure_mod!(arity9 Cif9
                     Callback9 CallbackMut9 CallbackOnce9
-                    Closure9 ClosureMut9 ClosureOnce9;
+                    Closure9 ClosureMut9 ClosureOnce9 ClosureOwned9;
                     A B C D E F G H I);
 define_closure_mod!(arity10 Cif10
                     Callback10 CallbackMut10 CallbackOnce10
-                    Closure10 ClosureMut10 ClosureOnce10;
+                    Closure10 ClosureMut10 ClosureOnce10 ClosureOwned10;
                     A B C D E F G H I J);
 define_closure_mod!(arity11 Cif11
                     Callback11 CallbackMut11 CallbackOnce11
-                    Closure11 ClosureMut11 ClosureOnce11;
+                    Closure11 ClosureMut11 ClosureOnce11 ClosureOwned11;
                     A B C D E F G H I J K);
 define_closure_mod!(arity12 Cif12
                     Callback12 CallbackMut12 CallbackOnce12
-                    Closure12 ClosureMut12 ClosureOnce12;
+                    Closure12 ClosureMut12 ClosureOnce12 ClosureOwned12;
                     A B C D E F G H I J K L);
 
 #[cfg(test)]
@@ -487,6 +568,22 @@ mod test {
     }
 
     #[test]
+    fn new_with_cif_owned() {
+        let mut x: u64 = 0;
+        let f = move |y: u64| { x += y; x };
+
+        let type_   = u64::reify();
+        let cif     = Cif1::new(type_.clone(), type_.clone());
+        let closure = ClosureOwned1::new_with_cif(cif, f);
+
+        let counter = closure.code_ptr();
+
+        assert_eq!(5, counter(5));
+        assert_eq!(6, counter(1));
+        assert_eq!(8, counter(2));
+    }
+
+    #[test]
     fn new() {
         let x: u64 = 1;
         let f = |y: u64, z: u64| x + y + z;
@@ -502,6 +599,18 @@ mod test {
         let mut f = |y: u32| { x += y as u64; x };
 
         let closure = ClosureMut1::new(&mut f);
+        let counter = closure.code_ptr();
+
+        assert_eq!(5, counter(5));
+        assert_eq!(6, counter(1));
+        assert_eq!(8, counter(2));
+    }
+
+    #[test]
+    fn new_owned() {
+        let mut x: u64 = 0;
+
+        let closure = ClosureOwned1::new(move |y: u32| { x += y as u64; x });
         let counter = closure.code_ptr();
 
         assert_eq!(5, counter(5));

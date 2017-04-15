@@ -169,4 +169,24 @@ impl Builder {
     {
         super::ClosureOnce::new(self.into_cif(), callback, userdata)
     }
+
+    /// Builds a owned closure.
+    ///
+    /// # Arguments
+    ///
+    /// - `callback` — the function to call when the closure is invoked
+    /// - `userdata` — the object to pass to `callback` along with the
+    ///   arguments when the closure is called
+    ///
+    /// # Result
+    ///
+    /// The new closure.
+    pub fn into_closure_owned<U: Any, R>(
+        self,
+        callback: super::CallbackMut<U, R>,
+        userdata: U)
+        -> super::ClosureOwned
+    {
+        super::ClosureOwned::new(self.into_cif(), callback, userdata)
+    }
 }

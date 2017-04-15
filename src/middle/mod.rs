@@ -410,6 +410,77 @@ impl ClosureOnce {
     }
 }
 
+/// A closure that owns userdata.
+#[derive(Debug)]
+pub struct ClosureOwned {
+    alloc:     *mut ::low::ffi_closure,
+    code:      CodePtr,
+    _cif:      Box<Cif>,
+    _userdata: Box<Any>,
+}
+
+impl Drop for ClosureOwned {
+    fn drop(&mut self) {
+        unsafe {
+            low::closure_free(self.alloc);
+        }
+    }
+}
+
+impl ClosureOwned {
+    /// Creates a new closure with owned userdata.
+    ///
+    /// # Arguments
+    ///
+    /// - `cif` — describes the calling convention and argument and
+    ///   result types
+    /// - `callback` — the function to call when the closure is invoked
+    /// - `userdata` — the value to pass to `callback` along with the
+    ///   arguments when the closure is called
+    ///
+    /// # Result
+    ///
+    /// The new closure.
+    pub fn new<U: Any, R>(cif:      Cif,
+                          callback: CallbackMut<U, R>,
+                          userdata: U)
+                          -> Self
+    {
+        let cif = Box::new(cif);
+        let mut userdata = Box::new(userdata) as Box<Any>;
+        let (alloc, code) = low::closure_alloc();
+
+        assert!(!alloc.is_null(), "closure_alloc: returned null");
+
+        unsafe {
+            let borrow = userdata.downcast_mut::<U>().unwrap();
+            low::prep_closure_mut(alloc,
+                                  cif.as_raw_ptr(),
+                                  callback,
+                                  borrow as *mut U,
+                                  code).unwrap();
+        }
+
+        ClosureOwned {
+            alloc:     alloc,
+            code:      code,
+            _cif:      cif,
+            _userdata: userdata,
+        }
+    }
+
+    /// Obtains the callable code pointer for a closure.
+    ///
+    /// # Safety
+    ///
+    /// The result needs to be transmuted to the correct type before
+    /// it can be called. If the type is wrong then undefined behavior
+    /// will result.
+    pub fn code_ptr(&self) -> &unsafe extern "C" fn() {
+        self.code.as_fun()
+    }
+}
+
 #[cfg(test)]
 mod test {
     use low;
@@ -485,5 +556,33 @@ mod test {
         let arg2 = **args.offset(1);
 
         *result = userdata(arg1, arg2);
+    }
+
+    #[test]
+    fn closure_owned() {
+        let cif = Cif::new(vec![Type::u64()].into_iter(), Type::u64());
+        let mut x = 0u64;
+        let userdata = move |y: u64| { x += y; x };
+        let closure = ClosureOwned::new(cif, callback3, userdata);
+
+        unsafe {
+            let fun: &unsafe extern "C" fn (u64) -> u64
+                = mem::transmute(closure.code_ptr());
+
+            assert_eq!(5, fun(5));
+            assert_eq!(11, fun(6));
+        }
+    }
+
+    unsafe extern "C" fn callback3<F: FnMut(u64) -> u64>
+        (_cif: &low::ffi_cif,
+         result: &mut u64,
+         args: *const *const c_void,
+         userdata: &mut F)
+    {
+        let args: *const &u64 = mem::transmute(args);
+        let arg1 = **args.offset(0);
+
+        *result = userdata(arg1);
     }
 }
