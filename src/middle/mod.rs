@@ -339,20 +339,7 @@ pub type CallbackOnce<U, R> = CallbackMut<Option<U>, R>;
 /// This allows the closure’s callback to take ownership of the data, in
 /// which case the userdata will be gone if called again.
 #[derive(Debug)]
-pub struct ClosureOnce {
-    alloc:     *mut ::low::ffi_closure,
-    code:      CodePtr,
-    _cif:      Box<Cif>,
-    _userdata: Box<Any>,
-}
-
-impl Drop for ClosureOnce {
-    fn drop(&mut self) {
-        unsafe {
-            low::closure_free(self.alloc);
-        }
-    }
-}
+pub struct ClosureOnce(ClosureOwned);
 
 impl ClosureOnce {
     /// Creates a new closure with owned userdata.
@@ -373,29 +360,7 @@ impl ClosureOnce {
                           userdata: U)
                           -> Self
     {
-        let cif = Box::new(cif);
-        let userdata = Box::new(Some(userdata)) as Box<Any>;
-        let (alloc, code) = low::closure_alloc();
-
-        assert!(!alloc.is_null(), "closure_alloc: returned null");
-
-        {
-            let borrow = userdata.downcast_ref::<Option<U>>().unwrap();
-            unsafe {
-                low::prep_closure_mut(alloc,
-                                      cif.as_raw_ptr(),
-                                      callback,
-                                      borrow as *const _ as *mut _,
-                                      code).unwrap();
-            }
-        }
-
-        ClosureOnce {
-            alloc:     alloc,
-            code:      code,
-            _cif:      cif,
-            _userdata: userdata,
-        }
+        ClosureOnce(ClosureOwned::new(cif, callback, Some(userdata)))
     }
 
     /// Obtains the callable code pointer for a closure.
@@ -406,7 +371,7 @@ impl ClosureOnce {
     /// it can be called. If the type is wrong then undefined behavior
     /// will result.
     pub fn code_ptr(&self) -> &unsafe extern "C" fn() {
-        self.code.as_fun()
+        self.0.code_ptr()
     }
 }
 
